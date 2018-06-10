@@ -1,0 +1,37 @@
+//线性查找的vector模板
+template<typename ElementType>
+void LinearSearch(const vector<ElementType> &v,
+	          const ElementType &item,
+		  boolean &found,int &loc)
+{
+	found=false;
+	loc=0;
+	for(;;){
+		if(found||loc==v.size())return ;
+		if(item==v[loc])
+			found=true;
+		else
+			loc++;
+	}
+}
+
+//线性查找单链表模板
+template<typename ElementType>
+void LinkedLinearSearch(NodePointer first,
+			const ElementType &item,
+			boolean &found,NodePointer &locptr)
+{
+	found=false;
+	locptr=first;
+	for(;;){
+		if(found||loc==NULL)return;
+		if(item==locptr->data)
+			found=true;
+		else locptr=locptr->next;
+	}
+}
+<algorithm>的标准算法find()中实行的查找就是线性查找
+调用形式:find(begin,end,item)
+begin指向列表的第一个元素
+end指向列表的最后一个元素之后的第一个位置
+若查找成功，返回item所在的位置，否则返回列表的最后一个元素之后的第一个位置
