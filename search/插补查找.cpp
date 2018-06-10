@@ -5,7 +5,7 @@ int data[max]={12,16,19,22,25,
 58,63,68,69,70,
 78,84,88,90,97};
 int count=1;
-//²å²¹²éÕÒ
+//æ’è¡¥æŸ¥æ‰¾
 int interpolation_search(int key)
 {
 	int low=0,high=max-1,middle;
@@ -25,7 +25,7 @@ int interpolation_search(int key)
 	}
 	return 0;
 }
-//Ö÷³ÌĞò
+//ä¸»ç¨‹åº
 int main()
 {
 	int key;

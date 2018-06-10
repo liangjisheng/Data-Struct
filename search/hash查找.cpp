@@ -4,16 +4,16 @@
 int data[max]={12,160,219,522,725,9997};
 int hashtab[hashmax];
 int counter=1;
-//hashº¯ÊıÖ®ÓàÊı·¨
+//hashå‡½æ•°ä¹‹ä½™æ•°æ³•
 int hash_mod(int key)
 {return key%hashmax;}
-//collision½â¾öÖ®²îÖµ·¨
+//collisionè§£å†³ä¹‹å·®å€¼æ³•
 int collision_offset(int address)
 {
-	int offset=3;    //ÉèÖÃ²îÖµÎª3
+	int offset=3;    //è®¾ç½®å·®å€¼ä¸º3
 	return (address+offset)%hashmax;
 }
-//½¨Á¢hash±í
+//å»ºç«‹hashè¡¨
 int create_hash(int key)
 {
 	int hashtime,collisiontime,address,i;
@@ -40,7 +40,7 @@ int create_hash(int key)
 	}
 	return 0;
 }
-//hash²éÕÒ
+//hashæŸ¥æ‰¾
 int hash_search(int key)
 {
 	int address;
@@ -54,7 +54,7 @@ int hash_search(int key)
 	}
 	return 0;
 }
-//Ö÷³ÌĞò
+//ä¸»ç¨‹åº
 void main()
 {
 	int keyvalue,index=0,i;

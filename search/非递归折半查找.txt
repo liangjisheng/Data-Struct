@@ -5,22 +5,22 @@ int data[max]={12,16,19,22,25,
 58,63,68,69,70,
 78,84,88,90,97};
 int count=1;
-//ÕÛ°ë²éÕÒ
+//æŠ˜åŠæŸ¥æ‰¾
 int b_search(int key)
 {
 	int left=0,right=max-1,middle;
 	while(left<=right)
 	{
 		middle=(left+right)/2;
-		if(key>data[middle])left=middle+1;            //Óû²éÕÒÖµ½Ï´ó£¬²éÕÒºó°ë¶Î
-		else if(key<data[middle])right=middle-1;      //Óû²éÕÒÖµ½ÏĞ¡£¬²éÕÒÇ°°ë¶Î
-		else if(key==data[middle])                    //ÏàµÈ£¬½áÊø
+		if(key>data[middle])left=middle+1;            //æ¬²æŸ¥æ‰¾å€¼è¾ƒå¤§ï¼ŒæŸ¥æ‰¾ååŠæ®µ
+		else if(key<data[middle])right=middle-1;      //æ¬²æŸ¥æ‰¾å€¼è¾ƒå°ï¼ŒæŸ¥æ‰¾å‰åŠæ®µ
+		else if(key==data[middle])                    //ç›¸ç­‰ï¼Œç»“æŸ
 		{printf("data[%d]=%d\n",middle,key);return 1;}
 		count++;
 	}
 	return 0;
 }
-//Ö÷³ÌĞò
+//ä¸»ç¨‹åº
 int main()
 {
 	int key;

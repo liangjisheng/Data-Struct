@@ -1,4 +1,4 @@
-//ÏßĞÔ²éÕÒµÄvectorÄ£°å
+//çº¿æ€§æŸ¥æ‰¾çš„vectoræ¨¡æ¿
 template<typename ElementType>
 void LinearSearch(const vector<ElementType> &v,
 	          const ElementType &item,
@@ -15,7 +15,7 @@ void LinearSearch(const vector<ElementType> &v,
 	}
 }
 
-//ÏßĞÔ²éÕÒµ¥Á´±íÄ£°å
+//çº¿æ€§æŸ¥æ‰¾å•é“¾è¡¨æ¨¡æ¿
 template<typename ElementType>
 void LinkedLinearSearch(NodePointer first,
 			const ElementType &item,
@@ -30,8 +30,8 @@ void LinkedLinearSearch(NodePointer first,
 		else locptr=locptr->next;
 	}
 }
-<algorithm>µÄ±ê×¼Ëã·¨find()ÖĞÊµĞĞµÄ²éÕÒ¾ÍÊÇÏßĞÔ²éÕÒ
-µ÷ÓÃĞÎÊ½:find(begin,end,item)
-beginÖ¸ÏòÁĞ±íµÄµÚÒ»¸öÔªËØ
-endÖ¸ÏòÁĞ±íµÄ×îºóÒ»¸öÔªËØÖ®ºóµÄµÚÒ»¸öÎ»ÖÃ
-Èô²éÕÒ³É¹¦£¬·µ»ØitemËùÔÚµÄÎ»ÖÃ£¬·ñÔò·µ»ØÁĞ±íµÄ×îºóÒ»¸öÔªËØÖ®ºóµÄµÚÒ»¸öÎ»ÖÃ
+<algorithm>çš„æ ‡å‡†ç®—æ³•find()ä¸­å®è¡Œçš„æŸ¥æ‰¾å°±æ˜¯çº¿æ€§æŸ¥æ‰¾
+è°ƒç”¨å½¢å¼:find(begin,end,item)
+beginæŒ‡å‘åˆ—è¡¨çš„ç¬¬ä¸€ä¸ªå…ƒç´ 
+endæŒ‡å‘åˆ—è¡¨çš„æœ€åä¸€ä¸ªå…ƒç´ ä¹‹åçš„ç¬¬ä¸€ä¸ªä½ç½®
+è‹¥æŸ¥æ‰¾æˆåŠŸï¼Œè¿”å›itemæ‰€åœ¨çš„ä½ç½®ï¼Œå¦åˆ™è¿”å›åˆ—è¡¨çš„æœ€åä¸€ä¸ªå…ƒç´ ä¹‹åçš„ç¬¬ä¸€ä¸ªä½ç½®

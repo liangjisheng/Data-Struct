@@ -6,7 +6,7 @@ int data[max]={12,160,219,522,725,
 958,963,1068,1169,1570,
 2278,5384,8888,9000,9997};
 int count=1;
-//ÕÒ³ö¼ÓÇ¿ĞÍ²å²¹²éÕÒµÄÖĞ¼äÖµ
+//æ‰¾å‡ºåŠ å¼ºå‹æ’è¡¥æŸ¥æ‰¾çš„ä¸­é—´å€¼
 int findrobust(int low,int high,int key)
 {
 	int gap,num1,num2,num3;
@@ -24,7 +24,7 @@ int findrobust(int low,int high,int key)
 	else return num2;}                  //num3>=num2>=num1
 	return 0;
 }
-//²å²¹²éÕÒ
+//æ’è¡¥æŸ¥æ‰¾
 int interpolation_search(int key)
 {
 	int low=0,high=max-1,middle;
@@ -44,7 +44,7 @@ int interpolation_search(int key)
 	}
 	return 0;
 }
-//Ö÷³ÌĞò
+//ä¸»ç¨‹åº
 int main()
 {
 	int key;

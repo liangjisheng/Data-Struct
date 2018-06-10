@@ -5,13 +5,13 @@ int data[max]={12,16,19,22,25,
 58,63,68,69,70,
 78,84,88,90,97};
 int count=1;
-//µİ¹éÇó·ÑÊ½¼¶Êı
+//é€’å½’æ±‚è´¹å¼çº§æ•°
 int fib(int n)
 {
 	if(n<=1)return n;
 	else return fib(n-1)+fib(n-2);
 }
-//·ÑÊ½²éÕÒ·¨
+//è´¹å¼æŸ¥æ‰¾æ³•
 int fibonacci_search(int n,int key)
 {
 	int root,distance_1,distance_2,temp;
@@ -39,7 +39,7 @@ int fibonacci_search(int n,int key)
 	}while(distance_2>=0);
 	return 0;
 }
-//Ö÷³ÌĞò
+//ä¸»ç¨‹åº
 void main()
 {
 	int key,fina;

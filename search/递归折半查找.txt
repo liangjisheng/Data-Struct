@@ -5,7 +5,7 @@ int data[max]={12,16,19,22,25,
 58,63,68,69,70,
 78,84,88,90,97};
 int count=0;
-//µİ¹éÕÛ°ë²éÕÒ
+//é€’å½’æŠ˜åŠæŸ¥æ‰¾
 int b_search(int left,int right,int key)
 {
 	int middle;
@@ -23,7 +23,7 @@ int b_search(int left,int right,int key)
 	}
 	return 0;
 }
-//Ö÷³ÌĞò
+//ä¸»ç¨‹åº
 int main()
 {
 	int key;

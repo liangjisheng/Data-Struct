@@ -38,7 +38,7 @@ void create_bitree(int *data)
 		}
 	}
 }
-//¶ş²æ²éÕÒ
+//äºŒå‰æŸ¥æ‰¾
 int bitree_search(int key)
 {
 	bitree po=root;
@@ -52,7 +52,7 @@ int bitree_search(int key)
 	}
 	return 0;
 }
-//Ö÷³ÌĞò
+//ä¸»ç¨‹åº
 void main()
 {
 	int keyvalue,i;
