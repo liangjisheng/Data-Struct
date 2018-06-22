@@ -1,0 +1,76 @@
+#include"stdio.h"
+#include"stdlib.h"
+struct tree
+{
+	struct tree *left;
+	int data;
+	struct tree *right;
+};
+typedef struct tree bitreenode;
+typedef bitreenode *bi_tree;
+/*插入某个节点到二叉树中*/
+bi_tree insert_bitreenode(bi_tree root,int node)
+{
+	bi_tree newnode,currentnode,parentnode;
+	newnode=(bi_tree)malloc(sizeof(bitreenode));
+	newnode->data=node;
+	newnode->left=NULL;
+	newnode->right=NULL;
+	if(root==NULL)
+		return newnode;
+	else
+	{
+		currentnode=root;
+		while(currentnode!=NULL)
+		{
+			parentnode=currentnode;
+			if(currentnode->data>node)
+				currentnode=currentnode->left;
+			else
+				currentnode=currentnode->right;
+		}
+		if(parentnode->data>node)
+			parentnode->left=newnode;
+		else
+			parentnode->right=newnode;
+	}
+	return root;
+}
+/*建立二叉树*/
+bi_tree create_bitree(int *nodelist,int len)
+{
+	int i;
+	bi_tree root=NULL;
+	for(i=0;i<len;i++)
+		root=insert_bitreenode(root,nodelist[i]);
+	return root;
+}
+/*前序遍历二叉树*/
+void preorder(bi_tree root)
+{
+	if(root!=NULL)
+	{
+		printf("%3d",root->data);
+		preorder(root->left);
+	    preorder(root->right);
+	}
+}
+/*主程序*/
+void main()
+{
+	int data,nodelist[20],index;
+	bi_tree root=NULL;
+	printf("input the elements of binary tree(exit for 0):\n");
+	index=0;
+	scanf("%d",&data);
+	while(data!=0)
+	{
+		nodelist[index]=data;
+		index++;
+		scanf("%d",&data);
+	}
+	root=create_bitree(nodelist,index);
+	printf("The preorder traversal result is:\n");
+	preorder(root);
+	printf("\n");
+}

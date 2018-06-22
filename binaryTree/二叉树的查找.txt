@@ -1,0 +1,107 @@
+#include"stdio.h"
+#include"stdlib.h"
+struct tree
+{
+	struct tree *left;
+	int data;
+	struct tree *right;
+};
+typedef struct tree bitreenode;
+typedef bitreenode *bitree;
+//递归建立二叉树
+bitree create_bitree(int *nodelist,int node)
+{
+	bitree newnode;
+	if(nodelist[node]==0||node>15)
+		return NULL;
+	else
+	{
+		newnode=(bitree)malloc(sizeof(bitreenode));
+		newnode->data=nodelist[node];
+		newnode->left=create_bitree(nodelist,2*node);        //递归建立左子树
+		newnode->right=create_bitree(nodelist,2*node+1);     //递归建立右子树
+		return newnode;
+	}
+}
+//二叉树的遍历查找
+bitree bitree_travel_search(bitree point,int findnode)
+{
+	bitree lp,rp;
+	if(point!=NULL)
+	{
+		if(point->data==findnode)
+			return point;
+		else
+		{
+			lp=bitree_travel_search(point->left,findnode);   //递归查找左子树
+			rp=bitree_travel_search(point->right,findnode);  //递归查找右子树
+			if(lp!=NULL)
+				return lp;        //该节点在左子树中
+			else
+			{
+				if(rp!=NULL)
+					return rp;    //该结点在右子树中
+				else
+					return NULL;  //未找到
+			}
+		}
+	}
+	else
+		return NULL;
+}
+//二叉树的二分查找
+bitree bitree_binary_search(bitree point,int findnode)
+{
+	while(point!=NULL)
+	{
+		if(point->data==findnode)
+			return point;
+		else
+		{
+			if(point->data>findnode)
+				point=point->left;
+			else
+				point=point->right;
+		}
+	}
+	return NULL;    //未找到
+}
+//二叉树的中序遍历
+void inorder(bitree root)
+{
+	if(root!=NULL)
+	{
+		inorder(root->left);       //遍历左子树
+		printf("%3d",root->data);  //输出数据元素
+		inorder(root->right);      //遍历右子树
+	}
+}
+//主程序
+void main()
+{
+	bitree root=NULL;
+	bitree point=NULL;
+	int findnode,nodelist[16];
+	int i;
+	printf("input the nodelist[16]:\n");    //输入数据
+	for(i=0;i<16;i++)
+		scanf("%d",&nodelist[i]);
+
+	root=create_bitree(nodelist,1);         //建立二叉树
+	printf("inorder travel bitree:\n");     //中序遍历二叉树
+	inorder(root);
+	printf("\n");
+	printf("input the findnode:\n");        //输入要查找的数
+	scanf("%d",&findnode);
+	point=bitree_travel_search(root,findnode);//进行遍历查找
+	if(point==NULL)
+		printf("travel search result:no found!!\n");
+	else
+		printf("travel search result:[%d]\n",point->data);
+
+	point=bitree_binary_search(root,findnode);//进行二分查找
+	if(point==NULL)
+		printf("binary search result:no found!!\n");
+	else
+		printf("binary search result:[%d]\n",point->data);
+}

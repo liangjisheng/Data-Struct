@@ -1,0 +1,124 @@
+#include"stdio.h"
+#include"stdlib.h"
+struct tree
+{
+	struct tree *left;
+	int data;
+	struct tree *right;
+};
+typedef struct tree bitreenode;
+typedef bitreenode *bi_tree;
+//插入节点到树中
+bi_tree insert_node(bi_tree root,int node)
+{
+	bi_tree newnode,currentnode,parentnode;
+	newnode=(bi_tree)malloc(sizeof(bitreenode));
+	newnode->data=node;
+	newnode->left=NULL;
+	newnode->right=NULL;
+	if(root==NULL)
+		return newnode;
+	else
+	{
+		currentnode=root;
+		while(currentnode!=NULL)
+		{
+			parentnode=currentnode;
+			if(currentnode->data>node)
+				currentnode=currentnode->left;
+			else
+				currentnode=currentnode->right;
+		}
+		if(parentnode->data>node)
+			parentnode->left=newnode;
+		else
+			parentnode->right=newnode;
+	}
+	return root;
+}
+//非递归建立二叉树
+bi_tree create_bitree(int *nodelist,int len)
+{
+	bi_tree root=NULL;
+	int i;
+	for(i=0;i<len;i++)
+		root=insert_node(root,nodelist[i]);
+	return root;
+}
+//前序遍历二叉树
+void preorder(bi_tree root)
+{
+	if(root!=NULL)
+	{
+		printf("%3d",root->data);
+		preorder(root->left);
+		preorder(root->right);
+	}
+}
+//二叉树的比较
+int equal_bitree(bi_tree root1,bi_tree root2)
+{
+	if(root1==NULL||root2==NULL)
+		return 1;
+	else if (root1->data==root2->data)
+	{
+		if(equal_bitree(root1->left,root2->left)==1)
+			return equal_bitree(root1->right,root2->right);
+		else
+			return 0;
+	}
+}
+	/*if(root1==NULL&&root2==NULL)
+		return 1;
+	else if(root1=NULL&&root2!=NULL)
+		return 0;
+	else if(root1!=NULL&&root2==NULL)
+		return 0;
+	else if(root1->data==root2->data)
+	{
+		if(equal_bitree(root1->left,root2->left)==1)
+			return equal_bitree(root1->right,root2->right);
+	}
+	else
+		return 0;*/
+//主程序
+void main()
+{
+	bi_tree root1=NULL,root2=NULL;
+	int index1,index2,equal,value;
+	int nodelist1[20],nodelist2[20];
+	index1=0;
+	index2=0;
+	printf("input the elements of binary tree1(exit for 0):\n");//输入树1的数据元素
+	scanf("%d",&value);
+	while(value!=0)
+	{
+		nodelist1[index1]=value;
+		index1++;
+		scanf("%d",&value);
+	}
+	printf("input the elements of bunary tree2(exit for 0):\n");//输入树2的数据元素 
+	scanf("%d",&value);
+	while(value!=0)
+	{
+		nodelist2[index2]=value;
+		index2++;
+		scanf("%d",&value);
+	}
+
+	root1=create_bitree(nodelist1,index1);     //建立二叉树1
+	root2=create_bitree(nodelist2,index2);     //建立二叉树2
+	equal=equal_bitree(root1,root2);           //比较树1和树2
+	printf("the compare result:");
+	if(equal==1)
+		printf("bitree1==bitree2!!\n");
+	else
+		printf("bitree1!=bitree2!!\n");
+
+	printf("the preorder traversal of tree1 is:\n");   //前序输出树1
+	preorder(root1);
+	printf("\n");
+	printf("the preorder traversal of tree2 is:\n");   //前序输出树2
+	preorder(root2);
+	printf("\n");
+}

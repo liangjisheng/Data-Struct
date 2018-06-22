@@ -1,0 +1,75 @@
+#include"stdio.h"
+#include"stdlib.h"
+struct tree
+{
+	struct tree *left;
+	int data;
+	struct tree *right;
+};
+typedef struct tree bitreenode;
+typedef bitreenode *bi_tree;
+//递归建立二叉树
+bi_tree create_bitree(int *nodelist,int position)
+{
+	bi_tree newnode;
+	if(nodelist[position]==0||position>15)
+		return NULL;
+	else
+	{
+		newnode=(bi_tree)malloc(sizeof(bitreenode));
+		newnode->data=nodelist[position];
+		newnode->left=create_bitree(nodelist,2*position);
+		newnode->right=create_bitree(nodelist,2*position+1);
+		return newnode;
+	}
+}
+//复制二叉树
+bi_tree copy_bitree(bi_tree point)
+{
+	bi_tree newnode;
+	if(point==NULL)
+		return point;
+	else
+	{
+		newnode=(bi_tree)malloc(sizeof(bitreenode));
+		newnode->data=point->data;
+		newnode->left=copy_bitree(point->left);
+		newnode->right=copy_bitree(point->right);
+		return newnode;
+	}
+}
+//中序遍历二叉树
+void inorder(bi_tree point)
+{
+	if(point!=NULL)
+	{
+		inorder(point->left);
+		printf("%3d",point->data);
+		inorder(point->right);
+	}
+	/*if(point==NULL)
+		return point;
+	else
+	{
+		inorder(point->left);
+		printf("%3d",point->data);
+		inorder(point->right);
+	}*/
+}
+//主程序
+void main()
+{
+	bi_tree root,copybitree;
+	int i,nodelist[16];
+	printf("input the nodelist[16]:\n");
+	for(i=0;i<16;i++)
+		scanf("%d",&nodelist[i]);
+	root=create_bitree(nodelist,1);
+	copybitree=copy_bitree(root);
+	printf("the origin inorder bitree is:\n");
+	inorder(root);
+	printf("\n");
+	printf("the copy inorder bitree is:\n");
+	inorder(copybitree);
+	printf("\n");
+}

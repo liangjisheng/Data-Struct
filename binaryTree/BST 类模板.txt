@@ -1,0 +1,169 @@
+//BST类模板
+#ifndef BINARY_SEARCH_TREE
+#define BINARY_SEARCH_TREE
+template<class DataType>
+class BST{
+	private:
+		//节点结构
+		class BinNode{
+		public:
+			DataType data;
+			BinNode *left,*right;
+			//BinNode构造函数
+			BinNode()
+			{left=right=0;}
+			BinNode(DataType item)//有参数的构造函数
+			{data=item;left=right=0;}
+		};
+	typedef BinNode* BinNodePointer;
+	public:
+		BST();//构造一颗空树
+		bool empty()const;//判断树空?
+		bool Search(const DataType & item)const;//在二叉树中查找特定的项
+		void Insert(const DataType & item);//插入特定项
+	private:
+		BinNodePointer root;
+};//类模板定义结束
+
+//成员函数的定义
+//初始化
+template<class DateType>
+inline BST<DataType>::BST()
+{root=0;}
+//判空
+template<class DataType>
+inline bool BST<DataType>::empty() const
+{return root==0;}
+//查找
+template<class DataType>
+bool BST<DataType>::Search(const DataType & item) const
+{
+	BinNodePointer locptr=root;
+	bool found=false;
+	for(;;){
+		if(found||locptr==0)break;
+		if(item<locptr->data)
+			locptr=locptr->left;
+		else if(item>locptr->data)
+			locptr=locptr->right;
+		else
+			found=true;
+	}
+	return found;
+}
+//插入
+template<class DateType>
+void BST<DataType>::Insert(const DataType & item)
+{
+	BinNodePointer locptr=root,praent=0;
+	bool found=false;
+	for(;;){
+		if(found||locptr==0)break;
+		parent=locptr;
+		if(item<locptr->data)
+			locptr=locptr->left;
+		else if(item>locptr->data)
+			locptr=locptr->right;
+		else
+			found=true;
+	}
+	if(found)
+		cerr<<"Item already in the tree"<<endl;
+	else{
+		locptr=new BinNode(item);
+		if(parent==0)              //空树
+			root=locptr;
+		else if(item<parent->data) //作为父亲的左儿子
+			parent->left=locptr;
+		else                       //作为父亲的右儿子
+			parent->right=locptr;	
+	}
+}
+#endif
+
+
+
+
+
+
+
+//BST二叉查找树
+#ifndef BINARY_SEARCH_TREE
+#define BINARY_SEARCH_TREE
+//类模板定义
+template<typename DataType>
+class BST{
+private:
+	//定义节点结构
+	class BinNode{
+	public:
+		DataType data;
+		BinNode *left,*right;
+		BinNode()
+		{left=ight=0;}
+		BinNode(DataType item)
+		{data=item;left=right=0;}
+	};
+	typedef BinNode* BinNodePointer;
+public:
+	BST();
+	bool empty()const;
+	bool search(const DataType& item)const;
+	void insert(const DataType& item);
+private:
+	BinNodePointer root;
+};
+
+template<typename DataType>
+inline BST<DataType>::BST()
+{root=0;}
+
+template<typename DataType>
+bool BST<DataType>::empty()const
+{return root==0;}
+
+template<typename DataType>
+bool BST<DataType>::search(const DataType& item)const
+{
+	BinNodePointer p=root;
+	bool found=false;
+	while(1){
+		if(found||p==0)break;
+		if(item < p->data)
+			p=p->left;
+		else if(item> p->data)
+			p=p->right;
+		else 
+			found=true;
+	}
+	return found;
+}
+
+template<typename DataType>
+void BST<DataType>::insert(const Datatype& item)
+{
+	BinNodePointer p=root,praent;
+	bool found=false;
+	while(1){
+		if(found||p==0)break;
+		parent=p;
+		if(item< p->data)
+			p=p->left;
+		else if(item> p->data)
+			p=p->right;
+		else
+			found=true;
+	}
+	if(found==true)
+		cerr<<"item already in the tree!"<<endl;
+	else{
+		p=new BinNode(item);
+		if(parent==0)
+			root=p;
+		else if(item<parent->data)
+			parent->left=p;
+		else
+			parent->right=p;
+	}
+}
+#endif

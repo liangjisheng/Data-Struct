@@ -1,0 +1,43 @@
+#include"stdio.h"
+/*建立二叉树*/
+void create_b_tree(int *b_tree,int *nodelist,int len)
+{
+	int i,level;
+	b_tree[1]=nodelist[1];
+	for(i=2;i<len;i++)
+	{
+		level=1;
+		while(b_tree[level]!=0)
+		{
+			if(nodelist[i]<b_tree[level])
+				level=2*level;
+			else
+				level=2*level+1;
+		}
+		b_tree[level]=nodelist[i];
+	}
+}
+void main()
+{
+	int i,index,data;
+	int nodelist[16],b_tree[16];
+	printf("input the elements of binary tree(exit for 0):\n");
+	/*读取数值到数组中*/
+	index=1;
+	scanf("%d",&data);
+	while(data!=0)
+	{
+		nodelist[index]=data;
+		index++;
+		scanf("%d",&data);
+	}
+	/*清除二叉树组的内容*/
+	for(i=0;i<16;i++)
+		b_tree[i]=0;
+	/*建立二叉树*/
+	create_b_tree(b_tree,nodelist,index);
+	/*输出二叉树*/
+	printf("The binary tree is:\n");
+	for(i=1;i<16;i++)
+		printf("%2d:[%d]\n",i,b_tree[i]);
+}

@@ -1,0 +1,49 @@
+#include"stdio.h"
+#include"stdlib.h"
+typedef struct tree
+{
+	struct tree *left;
+	int data;
+	struct tree *right;
+}bitreenode,*bi_tree;
+/*递归建立二叉树*/
+bi_tree create_bitree(int *nodelist,int position)
+{
+	bi_tree newnode;
+	if(nodelist[position]==0||position>9)
+		return NULL;
+	else
+	{
+		newnode=(bi_tree)malloc(sizeof(bitreenode));
+		newnode->data=nodelist[position];
+		/*递归建立左子树*/
+		newnode->left=create_bitree(nodelist,2*position);
+		/*递归建立右子树*/
+		newnode->right=create_bitree(nodelist,2*position+1);
+		/*返回树的位置*/
+		return newnode;
+	}
+}
+/*中序输出二叉树*/
+void inorder(bi_tree root)
+{
+	if(root!=NULL)
+	{
+		inorder(root->left);
+		printf("%3d",root->data);
+		inorder(root->right);
+	}
+}
+/*主程序*/
+void main()
+{
+	int i,nodelist[20];
+	bi_tree root=NULL;
+	printf("input the elements of bitree(exit for 0):\n");
+	for(i=0;i<10;i++)
+		scanf("%d",&nodelist[i]);
+	root=create_bitree(nodelist,1);
+	printf("inorder output the bitree:\n");
+	inorder(root);
+	printf("\n");
+}

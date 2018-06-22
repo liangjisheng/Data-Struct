@@ -1,0 +1,174 @@
+#include"stdio.h"
+#include"stdlib.h"
+struct tree
+{
+	struct tree *left;
+	int data;
+	struct tree *right;
+};
+typedef struct tree bitreenode;
+typedef bitreenode *bi_tree;
+//递归建立二叉树
+bi_tree create_bitree(int *nodelist,int position)
+{
+	bi_tree newnode;
+	if(nodelist[position]==0||position>15)
+		return NULL;
+	else
+	{
+		newnode=(bi_tree)malloc(sizeof(bitreenode));
+		newnode->data=nodelist[position];
+		newnode->left=create_bitree(nodelist,2*position);
+		newnode->right=create_bitree(nodelist,2*position+1);
+		return newnode;
+	}
+}
+//二叉树的二分查找
+bi_tree binary_search(bi_tree point,int findnode)
+{
+	while(point!=NULL)
+	{
+		if(point->data==findnode)
+			return point;
+		else if(point->data>findnode)
+			point=point->left;
+		else
+			point=point->right;
+	}
+	return NULL;
+}
+//二叉树的遍历查找要删除节点的父结点
+bi_tree travel_search(bi_tree point,int findnode,int *position)
+{
+	bi_tree parent=point;
+	*position=0;
+	while(point!=NULL)
+	{
+		if(point->data==findnode)
+			return parent;
+		else
+		{
+			parent=point;
+			if(point->data>findnode)
+			{point=point->left;*position=-1;}
+			else
+			{point=point->right;*position=1;}
+		}
+	}
+	return NULL;
+}
+//结点的删除
+bi_tree delete_node(bi_tree root,int deletenode)
+{
+	bi_tree parent,point,child;
+	int position;
+	parent=travel_search(root,deletenode,&position);
+	if(parent==NULL)            //该节点不在树中
+		return root;
+	else
+	{
+		switch(position)         //判断删除的位置
+		{
+		case -1:point=parent->left;break;
+		case 1:point=parent->right;break;
+		case 0:point=parent;break;
+		}
+		//没有左子树，也没有右子树
+		if(point->left==NULL&&point->right==NULL)
+		{
+			switch(position)
+			{
+			case -1:parent->left=NULL;break;
+			case 1:parent->right=NULL;break;
+			case 0:parent=NULL;break;
+			}
+			return root;
+		}
+		//没有左子树
+		else if(point->left==NULL&&point->right!=NULL)
+		{
+			if(parent->left==point)
+				parent->left=point->right;
+			else if(parent->right==point)
+				parent->right=point->right;
+			else
+				root=root->right;
+			free(point);
+			return root;
+		}
+		//没有右子树
+		else if(point->left!=NULL&&point->right==NULL)
+		{
+			if(parent->left==point)
+				parent->left=point->left;
+			else if(parent->right==point)
+				parent->right=point->left;
+			else
+				root=root->left;
+			return root;
+		}
+		//有左子树和右子树
+		else if(point->left!=NULL&&point->right!=NULL)
+		{
+			parent=point;
+			child=point->left;
+			//找到左子树中最右边的结点
+			while(child->right!=NULL)
+			{parent=child;child=child->right;}
+			point->data=child->data;
+			if(parent->left==child)
+				parent->left=child->left;
+			else
+				parent->right=child->right;
+			free(child);
+			return root;
+		}
+	}
+}
+//中序遍历二叉树
+void inorder(bi_tree point)
+{
+	if(point!=NULL)
+	{
+		inorder(point->left);
+		printf("%3d",point->data);
+		inorder(point->right);
+	}
+}
+//前序遍历二叉树
+void perorder(bi_tree point)
+{
+	if(point!=NULL)
+	{
+		printf("%3d",point->data);
+		perorder(point->left);
+		perorder(point->right);
+	}
+}
+//主程序
+void main()
+{
+	bi_tree root=NULL;
+	int data,nodelist[16],i,deletenode;
+	printf("input the nodelist[16]:\n");
+	for(i=0;i<16;i++)
+		scanf("%d",&nodelist[i]);
+	root=create_bitree(nodelist,1);//创建二叉树
+
+	printf("the origin inorder bitree is:\n");//中序输出二叉树
+	inorder(root);
+	printf("\n");
+	printf("the origin perorder bitree is:\n");//前序输出二叉树
+	perorder(root);
+	printf("\n");
+
+	printf("input the number you want to delete:");
+	scanf("%d",&deletenode);
+	root=delete_node(root,deletenode);
+	printf("the deleted tree is:\n");//中序输出删除之后的树
+	inorder(root);
+	printf("\n");
+	printf("the origin perorder bitree is:\n");//前序输出删除之后二叉树
+	perorder(root);
+	printf("\n");
+}
