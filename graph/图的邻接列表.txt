@@ -1,0 +1,70 @@
+#include"stdio.h"
+#include"stdlib.h"
+#define vertexnum 6
+struct node
+{
+	int vertex;
+	struct node *next;
+};
+typedef struct node *graph;
+struct node head[vertexnum];
+//建立邻接结点到临街列表内
+void create_graph(int vertex1,int vertex2)
+{
+	graph point,newnode;
+	newnode=(graph)malloc(sizeof(struct node));
+	if(newnode!=NULL)
+	{
+		newnode->vertex=vertex2;
+		newnode->next=NULL;
+		point=&(head[vertex1]);
+		while(point->next!=NULL)
+			point=point->next;
+		point->next=newnode;
+	}
+}
+//输出邻接列表内数据
+void print_graph(struct node *head)
+{
+	graph point;
+	point=head->next;
+	while(point!=NULL)
+	{
+		printf("[%d]",point->vertex);
+		point=point->next;
+	}
+	printf("\n");
+}
+//主程序
+void main()
+{
+	int source,destination,i;
+	for(i=0;i<vertexnum;i++)
+	{
+		head[i].vertex=i;
+		head[i].next=NULL;
+	}
+	printf("Please input the source and destination!\n");
+	printf("exit for source is -1!\n");
+	while(1)
+	{
+		printf("input the edge's source:");
+		scanf("%d",&source);
+		if(source==-1)
+			break;
+		printf("input the edge's destination:");
+		scanf("%d",&destination);
+		if(source==destination)
+			printf("error:self loop!\n");
+		else if(source>=vertexnum||destination>=vertexnum)
+			printf("error:out of range!\n");
+		else
+			create_graph(source,destination);
+	}
+	printf("##graph##\n");
+	for(i=0;i<vertexnum;i++)
+	{
+		printf("vertex[%d]:",i);
+		print_graph(&head[i]);
+	}
+}

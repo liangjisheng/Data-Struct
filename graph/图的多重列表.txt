@@ -1,0 +1,105 @@
+#include"stdio.h"
+#include"stdlib.h"
+#define vertexnum 5
+struct edge 
+{
+	int marked;
+	int vertex1;
+	int vertex2;
+	struct edge *edge1;
+	struct edge *edge2;
+};
+typedef struct edge *nextedge;
+struct node
+{
+	int vertex;
+	struct edge *next;
+};
+typedef struct node *graph;
+struct node head[vertexnum];
+//建立邻接顶点到多重链表内
+void create_graph(int vertex1,nextedge newnode)
+{
+	nextedge point,previous;
+	previous=NULL;
+	point=head[vertex1].next;
+	while(point!=NULL)
+	{
+		previous=point;
+		if(point->vertex1==vertex1)
+			point=point->edge1;
+		else
+			point=point->edge2;
+	}
+	if(previous==NULL)
+		head[vertex1].next=newnode;
+	else if(previous->vertex1==vertex1)
+		previous->edge1=newnode;
+	else
+		previous->edge2=newnode;
+}
+//输出多重链表内数据
+void print_graph(struct node *head)
+{
+	nextedge point;
+	point=head->next;
+	while(point!=NULL)
+	{
+		printf("(%d,%d)",point->vertex1,point->vertex2);
+		if(head->vertex==point->vertex1)
+			point=point->edge1;
+		else if(head->vertex==point->vertex2)
+			point=point->edge2;
+	}
+	printf("\n");
+}
+//主程序
+void main()
+{
+	int source,destination,choose,i;
+	nextedge newnode;
+	for(i=0;i<vertexnum;i++)
+	{
+		head[i].vertex=i;
+		head[i].next=NULL;
+	}
+	printf("1:Undirected graph.\n");
+	printf("2:directed graph.\n");
+	printf("please choose:");
+	scanf("%d",&choose);
+	printf("Please input the source and destination.\n");
+	printf("exit for source is -1.\n");
+	while(1)
+	{
+		printf("input the edge's source:");
+		scanf("%d",&source);
+		if(source==-1)
+			break;
+		printf("input the edge's destination:");
+		scanf("%d",&destination);
+		if(source==destination)
+			printf("error:self loop.\n");
+		else if(source>=vertexnum||destination>=vertexnum)
+			printf("error:out of range.\n");
+		else
+		{
+			newnode=(nextedge)malloc(sizeof(struct edge));
+			if(newnode!=NULL)
+			{
+				newnode->vertex1=source;
+				newnode->vertex2=destination;
+				newnode->edge1=NULL;
+				newnode->edge2=NULL;
+				create_graph(source,newnode);
+				if(choose==1)
+					create_graph(destination,newnode);
+			}
+		}
+	}
+	printf("##graph##\n");
+	for(i=1;i<vertexnum;i++)
+	{
+		printf("vertex[%d]:",i);
+		print_graph(&head[i]);
+	}
+}

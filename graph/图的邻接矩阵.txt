@@ -1,0 +1,45 @@
+#include"stdio.h"
+#define max 6
+int graph[max][max];
+//以矩阵形式输出图形
+void print_graph()
+{
+	int i,j;
+	printf("Vertex");
+	for(i=0;i<max;i++)
+		printf("%3d",i);
+	printf("\n");
+	for(i=0;i<max;i++)
+	{
+		printf("%4d  ",i);
+		for(j=0;j<max;j++)
+			printf("%3d",graph[i][j]);
+		printf("\n");
+	}
+}
+//主程序
+void main()
+{
+	int source,destination,i,j;
+	for(i=0;i<max;i++)
+		for(j=0;j<max;j++)
+			graph[i][j]=0;
+	printf("Please input the source and destination(exit for -1).\n");
+	while(1)
+	{
+		printf("input the source:");
+		scanf("%d",&source);
+		if(source==-1)
+			break;
+		printf("input the destination:");
+		scanf("%d",&destination);
+		if(source==destination)
+			printf("error:self loop!!\n");
+		else if(source>=max||destination>=max)
+			printf("error:Out of range!!\n");
+		else
+			graph[source][destination]=1;
+	}
+	printf("##Graph##\n");
+	print_graph();
+}
