@@ -10,10 +10,10 @@ int g_base = 0;
 
 
 /**
- * ³õÊ¼»¯bitmap
- * nSize:bitmapµÄ´óĞ¡£¬¼´bitÎ»µÄ¸öÊı
- * start:ÆğÊ¼Öµ
- * ·µ»ØÖµ: -1±íÊ¾Ê§°Ü£¬0±íÊ¾³É¹¦
+ * åˆå§‹åŒ–bitmap
+ * nSize:bitmapçš„å¤§å°ï¼Œå³bitä½çš„ä¸ªæ•°
+ * start:èµ·å§‹å€¼
+ * è¿”å›å€¼: -1è¡¨ç¤ºå¤±è´¥ï¼Œ0è¡¨ç¤ºæˆåŠŸ
 */
 int bitmap_init(int nSize, int start)
 {
@@ -28,9 +28,9 @@ int bitmap_init(int nSize, int start)
 }
 
 /**
- * ½«index¶ÔÓ¦µÄÎ»ÉèÎª1
- * index:ÒªÉèÖÃµÄÖµ
- * ·µ»ØÖµ: -1±íÊ¾Ê§°Ü£¬0±íÊ¾³É¹¦
+ * å°†indexå¯¹åº”çš„ä½è®¾ä¸º1
+ * index:è¦è®¾ç½®çš„å€¼
+ * è¿”å›å€¼: -1è¡¨ç¤ºå¤±è´¥ï¼Œ0è¡¨ç¤ºæˆåŠŸ
 */
 int bitmap_set(int index)
 {
@@ -45,8 +45,8 @@ int bitmap_set(int index)
 }
 
 /**
- * »ñÈ¡bitmapµÚiÎ»µÄÖµ
- * ·µ»ØÖµ£º-1±íÊ¾Ê§°Ü£¬·ñÔò·µ»Ø¶ÔÓ¦Î»µÄÖµ
+ * è·å–bitmapç¬¬iä½çš„å€¼
+ * è¿”å›å€¼ï¼š-1è¡¨ç¤ºå¤±è´¥ï¼Œå¦åˆ™è¿”å›å¯¹åº”ä½çš„å€¼
 */
 int bitmap_get(int i)
 {
@@ -61,7 +61,7 @@ int bitmap_get(int i)
 }
 
 /**
- * ·µ»ØindexÎ»¶ÔÓ¦µÄÖµ
+ * è¿”å›indexä½å¯¹åº”çš„å€¼
 */
 int bitmap_data(int index) { return index + g_base; }
 

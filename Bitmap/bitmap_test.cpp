@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "bitmap.h"
 
-void main()
+int main()
 {
 	int a[] = { 5,8,7,6,3,1,10,78,56,34,23,12,43,54,65,76,87,98,89,100 };
 	int i = 0;
@@ -20,5 +20,5 @@ void main()
 	printf("\n");
 	bitmap_free();
 
-	getchar();
+	return 0;
 }
