@@ -1,17 +1,21 @@
 #include"stdio.h"
 #define max 20
-int data[max]={12,16,19,22,25,
-32,39,48,55,57,
-58,63,68,69,70,
-78,84,88,90,97};
+
+int data[max] = { 12, 16, 19, 22, 25, 32, 39, 48, 55, 57,
+				  	  58, 63, 68, 69, 70, 78, 84, 88, 90, 97 };
 int count=1;
-//递归求费式级数
-int fib(int n)
-{
-	if(n<=1)return n;
-	else return fib(n-1)+fib(n-2);
+
+// 递归求费式级数
+int fib(int n){
+	if (n <= 1) {
+		return n;
+	}
+	else {
+		return fib(n - 1) + fib(n - 2);
+	}
 }
-//费式查找法
+
+// 费式查找法
 int fibonacci_search(int n,int key)
 {
 	int root,distance_1,distance_2,temp;
@@ -39,7 +43,7 @@ int fibonacci_search(int n,int key)
 	}while(distance_2>=0);
 	return 0;
 }
-//主程序
+
 void main()
 {
 	int key,fina;
