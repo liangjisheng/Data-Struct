@@ -1,7 +1,7 @@
 
 #include "HashTable.h"
 
-// ³ıÁôÈ¡Óà·¨
+// é™¤ç•™å–ä½™æ³•
 static int HashFunc(KeyType Key) { return Key % HASHTABLE_SIZE; }
 
 static _ElementNode_* HashTableFind_(HashTable Hash, KeyType Key)
@@ -12,15 +12,15 @@ static _ElementNode_* HashTableFind_(HashTable Hash, KeyType Key)
 	if (NULL == Hash)
 		return NULL;
 
-	pos = HashFunc(Key);		// ÇóKeyËù¶ÔÓ¦µÄ»ùÍ°
-	p = Hash + pos;				// Ö¸Ïò¸Ã»ùÍ°
+	pos = HashFunc(Key);		// æ±‚Keyæ‰€å¯¹åº”çš„åŸºæ¡¶
+	p = Hash + pos;				// æŒ‡å‘è¯¥åŸºæ¡¶
 
-	// ÔÚ»ùÍ°ÄÚÑ°ÕÒÎ»ÖÃ
+	// åœ¨åŸºæ¡¶å†…å¯»æ‰¾ä½ç½®
 	for (i = 0; i < BUCKET_SIZE; ++i)
 		if (Key == p->Data[i].Key)
 			return p->Data + i;
 
-	// ²»ÔÚ»ùÍ°ÖĞ£¬µ½Òç³öÍ°ÖĞ²éÕÒ
+	// ä¸åœ¨åŸºæ¡¶ä¸­ï¼Œåˆ°æº¢å‡ºæ¡¶ä¸­æŸ¥æ‰¾
 	while (p->Bucket)
 	{
 		p = p->Bucket;
@@ -29,25 +29,25 @@ static _ElementNode_* HashTableFind_(HashTable Hash, KeyType Key)
 				return p->Data + i;
 	}
 
-	// Òç³öÍ°ÖĞÒ²Ã»ÓĞ
+	// æº¢å‡ºæ¡¶ä¸­ä¹Ÿæ²¡æœ‰
 	return NULL;
 }
 
-// ¸üĞÂÍ°ÄÚÒ»¸öÔªËØ£¬Èç¹ûÔªËØ´æÔÚÔòÓÃĞÂÖµ¸üĞÂ£¬Èç¹ûÔªËØ²»´æÔÚÔòÕÒ¿ÕÎ»ÖÃ²åÈë
+// æ›´æ–°æ¡¶å†…ä¸€ä¸ªå…ƒç´ ï¼Œå¦‚æœå…ƒç´ å­˜åœ¨åˆ™ç”¨æ–°å€¼æ›´æ–°ï¼Œå¦‚æœå…ƒç´ ä¸å­˜åœ¨åˆ™æ‰¾ç©ºä½ç½®æ’å…¥
 static bool UpdateBucket(HashBucket *p, KeyType Key, EleType Data)
 {
 	int i = 0; 
-	// ±éÀú»ùÍ°ÖĞµÄÃ¿¸öÎ»ÖÃ£¬²éÕÒÊÇ·ñÓĞ¿ÕÎ»£¬»òÕßÊÇ·ñ¿ÉÒÔ¸üĞÂÏÖÓĞÔªËØ
+	// éå†åŸºæ¡¶ä¸­çš„æ¯ä¸ªä½ç½®ï¼ŒæŸ¥æ‰¾æ˜¯å¦æœ‰ç©ºä½ï¼Œæˆ–è€…æ˜¯å¦å¯ä»¥æ›´æ–°ç°æœ‰å…ƒç´ 
 	for (i = 0; i < BUCKET_SIZE; ++i)
 	{
-		//KeyÒÑ´æÔÚÔò¸üĞÂVal£¬Ïàµ±ÓÚÊÇ¶ÔÒÑ´æÔÚÔªËØ½øĞĞĞŞ¸Ä
+		//Keyå·²å­˜åœ¨åˆ™æ›´æ–°Valï¼Œç›¸å½“äºæ˜¯å¯¹å·²å­˜åœ¨å…ƒç´ è¿›è¡Œä¿®æ”¹
 		if (Key == p->Data[i].Key)
 		{
 			p->Data[i].Val = Data;
 			return true;
 		}
 
-		//Key²»´æÔÚÔòÔö¼ÓÔªËØ¼ÇÂ¼£¬¼´½«ĞÂÔªËØ´æÈë¹şÏ£±í
+		//Keyä¸å­˜åœ¨åˆ™å¢åŠ å…ƒç´ è®°å½•ï¼Œå³å°†æ–°å…ƒç´ å­˜å…¥å“ˆå¸Œè¡¨
 		if (INVALID_VALUE == p->Data[i].Key)
 		{
 			p->Data[i].Key = Key;
@@ -56,11 +56,11 @@ static bool UpdateBucket(HashBucket *p, KeyType Key, EleType Data)
 		}
 	}
 
-	// µ±Í°ÄÚÔªËØÂúÁË£¬ÇÒÍ°ÄÚÃ»ÓĞÓëKeyÏàµÈµÄ¼üÖµ£¬Ôò¸üĞÂÊ§°Ü
+	// å½“æ¡¶å†…å…ƒç´ æ»¡äº†ï¼Œä¸”æ¡¶å†…æ²¡æœ‰ä¸Keyç›¸ç­‰çš„é”®å€¼ï¼Œåˆ™æ›´æ–°å¤±è´¥
 	return false;
 }
 
-// ´´½¨Ò»ÕÅº¬ÓĞHASHTABLE_SIZE¸ö»ùÍ°µÄ¹şÏ£±í
+// åˆ›å»ºä¸€å¼ å«æœ‰HASHTABLE_SIZEä¸ªåŸºæ¡¶çš„å“ˆå¸Œè¡¨
 bool HashTableInit(HashTable *Hash)
 {
 	int i = 0, j = 0;
@@ -71,10 +71,10 @@ bool HashTableInit(HashTable *Hash)
 		return false;
 	}
 
-	// ³õÊ¼»¯È«²¿»ùÍ°
+	// åˆå§‹åŒ–å…¨éƒ¨åŸºæ¡¶
 	for (i = 0; i < HASHTABLE_SIZE; ++i)
 	{
-		// ³õÊ¼»¯Í°ÄÚÃ¿¸öÎ»ÖÃ
+		// åˆå§‹åŒ–æ¡¶å†…æ¯ä¸ªä½ç½®
 		for (j = 0; j < BUCKET_SIZE; ++j)
 		{
 			p[i].Data[j].Key = INVALID_VALUE;
@@ -87,7 +87,7 @@ bool HashTableInit(HashTable *Hash)
 	return true;
 }
 
-// ²åÈëº¯Êı£¬µ±KeyÒÔ´æÔÚÊ±£¬¸üĞÂÔªËØ£¬·ñÔòÔÚ¿ÕÎ»ÖÃÖĞ²åÈëÔªËØ
+// æ’å…¥å‡½æ•°ï¼Œå½“Keyä»¥å­˜åœ¨æ—¶ï¼Œæ›´æ–°å…ƒç´ ï¼Œå¦åˆ™åœ¨ç©ºä½ç½®ä¸­æ’å…¥å…ƒç´ 
 bool HashTableInsert(HashTable Hash, KeyType Key, EleType Data)
 {
 	int pos = 0, i = 0;
@@ -95,28 +95,28 @@ bool HashTableInsert(HashTable Hash, KeyType Key, EleType Data)
 	if (NULL == Hash)
 		return false;
 
-	pos = HashFunc(Key);		// KeyËù¶ÔÓ¦µÄ»ùÍ°
-	p = Hash + pos;				// Ö¸Ïò¸Ã»ùÍ°
+	pos = HashFunc(Key);		// Keyæ‰€å¯¹åº”çš„åŸºæ¡¶
+	p = Hash + pos;				// æŒ‡å‘è¯¥åŸºæ¡¶
 
-	// Í°ÄÚÔªËØ¸üĞÂ,¸üĞÂ³É¹¦·µ»Øtrue
+	// æ¡¶å†…å…ƒç´ æ›´æ–°,æ›´æ–°æˆåŠŸè¿”å›true
 	if (true == UpdateBucket(p, Key, Data))
 		return true;
 
-	// »ùÍ°ÄÚÃ»ÓĞ¿ÕÎ»ÖÃ£¬ÔÚÒç³öÍ°ÄÚÑ°ÕÒÎ»ÖÃ
+	// åŸºæ¡¶å†…æ²¡æœ‰ç©ºä½ç½®ï¼Œåœ¨æº¢å‡ºæ¡¶å†…å¯»æ‰¾ä½ç½®
 	while (p->Bucket)
 	{
 		p = p->Bucket;
-		// Í°ÄÚÔªËØ¸üĞÂ³É¹¦
+		// æ¡¶å†…å…ƒç´ æ›´æ–°æˆåŠŸ
 		if (true == UpdateBucket(p, Key, Data))
 			return true;
 	}
 
-	// ÔÚÒÑ²éÕÒ¹ıµÄÍ°ÄÚ¶¼Î´ÄÜÕÒµ½ºÏÊÊµÄÎ»ÖÃ£¬´´½¨Ò»¸öĞÂµÄÒç³öÍ°À´´æ´¢ÔªËØ
+	// åœ¨å·²æŸ¥æ‰¾è¿‡çš„æ¡¶å†…éƒ½æœªèƒ½æ‰¾åˆ°åˆé€‚çš„ä½ç½®ï¼Œåˆ›å»ºä¸€ä¸ªæ–°çš„æº¢å‡ºæ¡¶æ¥å­˜å‚¨å…ƒç´ 
 	s = (HashBucket *)malloc(sizeof(HashBucket));
 	if (NULL == s)
 		return false;
 
-	// ³õÊ¼»¯Í°
+	// åˆå§‹åŒ–æ¡¶
 	for (i = 0; i < BUCKET_SIZE; ++i)
 	{
 		s->Data[i].Key = INVALID_VALUE;
@@ -124,9 +124,9 @@ bool HashTableInsert(HashTable Hash, KeyType Key, EleType Data)
 	}
 	s->Bucket = NULL;
 
-	s->Data[0].Key = Key;		// ½«KeyÖµ¶Ô´æ´¢ÔÚÒç³öÍ°Ê×Î»ÖÃÖĞ
+	s->Data[0].Key = Key;		// å°†Keyå€¼å¯¹å­˜å‚¨åœ¨æº¢å‡ºæ¡¶é¦–ä½ç½®ä¸­
 	s->Data[0].Val = Data;
-	p->Bucket = s;				// ½«ĞÂÍ°¹Ò½ÓÉÏÈ¥
+	p->Bucket = s;				// å°†æ–°æ¡¶æŒ‚æ¥ä¸Šå»
 
 	return true;
 }
@@ -146,7 +146,7 @@ bool HashTableDelete(HashTable Hash, KeyType Key)
 
 	if (p)
 	{
-		// ²éÕÒ¡¢²åÈë¶¼ÊÇ¸ù¾İKeyÖµÀ´µÄ£¬Òò´ËÖ»Ğè¸²¸ÇKey¼´¿É
+		// æŸ¥æ‰¾ã€æ’å…¥éƒ½æ˜¯æ ¹æ®Keyå€¼æ¥çš„ï¼Œå› æ­¤åªéœ€è¦†ç›–Keyå³å¯
 		p->Key = INVALID_VALUE;
 		return true;
 	}
@@ -164,13 +164,13 @@ void HashTablePrint(HashTable Hash)
 	for (i = 0; i < HASHTABLE_SIZE; ++i)
 	{
 		p = Hash + i;
-		// ´òÓ¡»ùÍ°
+		// æ‰“å°åŸºæ¡¶
 		printf("BaseBucket%d: ", i);
 		for (j = 0; j < BUCKET_SIZE; ++j)
 			printf("(%d, %d) ", p->Data[j].Key, p->Data[j].Val);
 		printf("\n");
 
-		// ´òÓ¡Òç³öÍ°
+		// æ‰“å°æº¢å‡ºæ¡¶
 		q = p->Bucket;
 		while (q)
 		{
@@ -191,11 +191,11 @@ void HashTableDestroy(HashTable *Hash)
 	if (NULL == Hash)
 		return ;
 
-	p = *Hash;				// Ö¸ÏòÊ×¸ö»ùÍ°
+	p = *Hash;				// æŒ‡å‘é¦–ä¸ªåŸºæ¡¶
 	for (i = 0; i < HASHTABLE_SIZE; ++i)
 	{
-		q = p->Bucket;			// Ö¸ÏòÄ³¸ö»ùÍ°µÄÒç³öÍ°Ëù¹¹³ÉµÄÁ´±í
-		while (q)				// ÊÍ·ÅÒç³öÍ°Ëù¹¹³ÉµÄÁ´±í
+		q = p->Bucket;			// æŒ‡å‘æŸä¸ªåŸºæ¡¶çš„æº¢å‡ºæ¡¶æ‰€æ„æˆçš„é“¾è¡¨
+		while (q)				// é‡Šæ”¾æº¢å‡ºæ¡¶æ‰€æ„æˆçš„é“¾è¡¨
 		{
 			s = q->Bucket;
 			p->Bucket = s;
@@ -205,6 +205,6 @@ void HashTableDestroy(HashTable *Hash)
 		++p;
 	}
 
-	free(*Hash);				// ÊÍ·ÅÈ«²¿»ùÍ°
+	free(*Hash);				// é‡Šæ”¾å…¨éƒ¨åŸºæ¡¶
 	*Hash = NULL;
 }

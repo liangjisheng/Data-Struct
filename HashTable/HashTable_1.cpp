@@ -1,5 +1,5 @@
 
-// HashTable,²ÉÓÃÊı×éÊµÏÖ
+// HashTable,é‡‡ç”¨æ•°ç»„å®ç°
 
 #include <stdio.h>
 
@@ -8,39 +8,39 @@
 
 typedef struct HashNode
 {
-	DataType data;		// ´æ´¢Öµ
-	int isNull;			// ±êÖ¾¸ÃÎ»ÖÃÊÇ·ñÒÑ±»Ìî³ä
+	DataType data;		// å­˜å‚¨å€¼
+	int isNull;			// æ ‡å¿—è¯¥ä½ç½®æ˜¯å¦å·²è¢«å¡«å……
 }HashTable;
 
 HashTable hashTable[M];
 
 
-// ¶Ôhash±í½øĞĞ³õÊ¼»¯
+// å¯¹hashè¡¨è¿›è¡Œåˆå§‹åŒ–
 void initHashTable()
 {
 	int i;
 	for (i = 0; i < M; ++i)
-		hashTable[i].isNull = 1;		// ³õÊ¼×´Ì¬Îª¿Õ
+		hashTable[i].isNull = 1;		// åˆå§‹çŠ¶æ€ä¸ºç©º
 }
 
-// Hashº¯Êı
+// Hashå‡½æ•°
 int getHashAddress(DataType key) { return key % M; }
 
-// Ïòhash±íÖĞ²åÈëÊı¾İ
+// å‘hashè¡¨ä¸­æ’å…¥æ•°æ®
 int insert(DataType key)
 {
 	int address = getHashAddress(key);
 
-	if (hashTable[address].isNull == 1)		// Ã»ÓĞ·¢Éú³åÍ»
+	if (hashTable[address].isNull == 1)		// æ²¡æœ‰å‘ç”Ÿå†²çª
 	{
 		hashTable[address].data = key;
 		hashTable[address].isNull = 0;
 	}
-	else		// ÓĞ³åÍ»
+	else		// æœ‰å†²çª
 	{
 		while (hashTable[address].isNull == 0 && address < M)
 			address++;
-		if (address == M)		// Hash±í·¢ÉúÒç³ö
+		if (address == M)		// Hashè¡¨å‘ç”Ÿæº¢å‡º
 			return -1;
 
 		hashTable[address].data = key;
@@ -50,7 +50,7 @@ int insert(DataType key)
 	return 0;
 }
 
-// ²éÕÒ
+// æŸ¥æ‰¾
 int find(DataType key)
 {
 	int address = getHashAddress(key);

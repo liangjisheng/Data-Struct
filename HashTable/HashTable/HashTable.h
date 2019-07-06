@@ -7,15 +7,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUCKET_SIZE 5		// Òç³öÍ°µÄ´óĞ¡£¬´Ë´¦µÄÖµ±íÊ¾¿ÉÈİÄÉ5¸öÔªËØ
-#define HASHTABLE_SIZE 17	// ¹şÏ£±íµÄ»ùÍ°¸öÊı£¬ÎªÁËÊ¹µÃ³öµÄ¹şÏ£Òò×ÓÔÚËùÓĞ¿ÉµÃµÄÖµÖĞ
-							// µÃ³öÈÎÒ»ÖµµÄ¸ÅÂÊÏàÍ¬£¬ËùÓĞÊ¹ÓÃËØÊı×÷Îª»ùÍ°¸öÊı
-#define INVALID_VALUE -11111	// ÎŞĞ§±ê¼Ç
+#define BUCKET_SIZE 5		// æº¢å‡ºæ¡¶çš„å¤§å°ï¼Œæ­¤å¤„çš„å€¼è¡¨ç¤ºå¯å®¹çº³5ä¸ªå…ƒç´ 
+#define HASHTABLE_SIZE 17	// å“ˆå¸Œè¡¨çš„åŸºæ¡¶ä¸ªæ•°ï¼Œä¸ºäº†ä½¿å¾—å‡ºçš„å“ˆå¸Œå› å­åœ¨æ‰€æœ‰å¯å¾—çš„å€¼ä¸­
+							// å¾—å‡ºä»»ä¸€å€¼çš„æ¦‚ç‡ç›¸åŒï¼Œæ‰€æœ‰ä½¿ç”¨ç´ æ•°ä½œä¸ºåŸºæ¡¶ä¸ªæ•°
+#define INVALID_VALUE -11111	// æ— æ•ˆæ ‡è®°
 
 typedef int EleType;
 typedef int KeyType;
 
-struct _ElementNode_		// ÔªËØ½ÚµãÀàĞÍ£¬¼üÖµ¶Ô
+struct _ElementNode_		// å…ƒç´ èŠ‚ç‚¹ç±»å‹ï¼Œé”®å€¼å¯¹
 {
 	KeyType Key;
 	EleType Val;
@@ -24,16 +24,16 @@ struct _ElementNode_		// ÔªËØ½ÚµãÀàĞÍ£¬¼üÖµ¶Ô
 typedef struct _HashBucket_
 {
 	_ElementNode_ Data[BUCKET_SIZE];
-	struct _HashBucket_ *Bucket;		// ½â¾ö³åÍ»µÄ·½Ê½ÊÇÁ´µØÖ··¨
-}HashBucket;	// Í°½ÚµãÀàĞÍ
+	struct _HashBucket_ *Bucket;		// è§£å†³å†²çªçš„æ–¹å¼æ˜¯é“¾åœ°å€æ³•
+}HashBucket;	// æ¡¶èŠ‚ç‚¹ç±»å‹
 
 typedef HashBucket* HashTable;
 
-bool HashTableInit(HashTable *Hash);					// ³õÊ¼»¯¹şÏ£±í
-bool HashTableInsert(HashTable Hash, KeyType Key, EleType Data);	// ²åÈë¼üÖµ¶Ô
-EleType* HashTableFind(HashTable Hash, KeyType Key);	// ¸ù¾İ¼ü²éÕÒÖµ
-bool HashTableDelete(HashTable Hash, KeyType Key);		// É¾³ı¼üÖµ¶Ô
-void HashTablePrint(HashTable Hash);					// ´òÓ¡¹şÏ£±í
-void HashTableDestroy(HashTable *Hash);					// Ïú»Ù¹şÏ£±í
+bool HashTableInit(HashTable *Hash);					// åˆå§‹åŒ–å“ˆå¸Œè¡¨
+bool HashTableInsert(HashTable Hash, KeyType Key, EleType Data);	// æ’å…¥é”®å€¼å¯¹
+EleType* HashTableFind(HashTable Hash, KeyType Key);	// æ ¹æ®é”®æŸ¥æ‰¾å€¼
+bool HashTableDelete(HashTable Hash, KeyType Key);		// åˆ é™¤é”®å€¼å¯¹
+void HashTablePrint(HashTable Hash);					// æ‰“å°å“ˆå¸Œè¡¨
+void HashTableDestroy(HashTable *Hash);					// é”€æ¯å“ˆå¸Œè¡¨
 
 #endif // _HASHTABLE_H_

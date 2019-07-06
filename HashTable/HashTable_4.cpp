@@ -1,5 +1,5 @@
 
-// ¹şÏ£±íµÄÊı×éÊµÏÖ£¬ÏßĞÔÌ½²â£¬¶ş´ÎÌ½²â
+// å“ˆå¸Œè¡¨çš„æ•°ç»„å®ç°ï¼Œçº¿æ€§æ¢æµ‹ï¼ŒäºŒæ¬¡æ¢æµ‹
 
 #include <iostream>
 
@@ -8,9 +8,9 @@ using std::endl;
 
 enum State
 {
-	EMPTY,		// ¿Õ
-	EXCITE,		// ´æÔÚ
-	DELETE,		// ±ê¼ÇÎª¿Õ£¬µ«²»Îª¿Õ
+	EMPTY,		// ç©º
+	EXCITE,		// å­˜åœ¨
+	DELETE,		// æ ‡è®°ä¸ºç©ºï¼Œä½†ä¸ä¸ºç©º
 };
 
 template<typename T>
@@ -19,8 +19,8 @@ class HashTable
 public:
 	HashTable(size_t capacity) : _capacity(capacity), _size(0)
 	{
-		_table = new T[_capacity];		// ¿ª±Ù¹şÏ£¿Õ¼ä
-		_state = new State[_capacity];		// ¿ª±ÙºÍ¹şÏ£ÈİÁ¿Ò»ÑùµÄ¿Õ¼ä´æ·Å×´Ì¬
+		_table = new T[_capacity];		// å¼€è¾Ÿå“ˆå¸Œç©ºé—´
+		_state = new State[_capacity];		// å¼€è¾Ÿå’Œå“ˆå¸Œå®¹é‡ä¸€æ ·çš„ç©ºé—´å­˜æ”¾çŠ¶æ€
 		memset(_table, T(), sizeof(T) * _capacity);
 		memset(_state, EMPTY, sizeof(State) * _capacity);
 	}
@@ -34,11 +34,11 @@ public:
 public:
 	bool Insert(const T& key)
 	{
-		if (_size == _capacity)		// ¿Õ¼äÒÑÂú
+		if (_size == _capacity)		// ç©ºé—´å·²æ»¡
 			return false;
-		size_t pos = hashFun1(key);	// ¼ÆËãkeyµÄÏÂ±ê
+		size_t pos = hashFun1(key);	// è®¡ç®—keyçš„ä¸‹æ ‡
 		int idx = 1;
-		while (_state[pos] == EXCITE)	// Õâ¸öÎ»ÖÃÓĞÖµ
+		while (_state[pos] == EXCITE)	// è¿™ä¸ªä½ç½®æœ‰å€¼
 		{
 			if (_table[pos] == key)
 				return false;
@@ -52,10 +52,10 @@ public:
 	}
 	bool Remove(const T& key)
 	{
-		if (_size <= 0)			// ¹şÏ£±íÎª¿Õ
+		if (_size <= 0)			// å“ˆå¸Œè¡¨ä¸ºç©º
 			return false;
 
-		size_t pos = hashFun1(key);	// ¼ÆËãkeyµÄÏÂ±ê
+		size_t pos = hashFun1(key);	// è®¡ç®—keyçš„ä¸‹æ ‡
 		int idx = 1;
 		while (_state[pos] != EMPTY)
 		{
@@ -86,16 +86,16 @@ public:
 
 	void HashPrint();
 private:
-	// Ò»´ÎÌ½²â
+	// ä¸€æ¬¡æ¢æµ‹
 	size_t hashFun1(const T& key) { return key % _capacity; }
-	// ¶ş´ÎÌ½²â
+	// äºŒæ¬¡æ¢æµ‹
 	size_t hashFun2(size_t lasthash, int idx) { return (lasthash + 2 * idx - 1) % _capacity; }
 
 private:
-	T *_table;			// ¹şÏ£±í
-	State *_state;		// ×´Ì¬
-	size_t _capacity;	// ÈİÁ¿
-	size_t _size;		// ÔªËØ¸öÊı
+	T *_table;			// å“ˆå¸Œè¡¨
+	State *_state;		// çŠ¶æ€
+	size_t _capacity;	// å®¹é‡
+	size_t _size;		// å…ƒç´ ä¸ªæ•°
 };
 
 template<typename T>

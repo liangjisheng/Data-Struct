@@ -1,34 +1,34 @@
 
-// ³ıÁôÓàÊı·¨¶¨Ö·£¬ÏßĞÔÌ½²â·¨½â¾ö³åÍ»
+// é™¤ç•™ä½™æ•°æ³•å®šå€ï¼Œçº¿æ€§æ¢æµ‹æ³•è§£å†³å†²çª
 
 #include <stdio.h>
 
-#define MaxSize 100				// ×î´ó¹şÏ£±í³¤¶È
-#define NULLKEY -1				// ¿Õ¹Ø¼ü×Ö
-#define DELKEY -2				// ±»É¾¹Ø¼ü×Ö
+#define MaxSize 100				// æœ€å¤§å“ˆå¸Œè¡¨é•¿åº¦
+#define NULLKEY -1				// ç©ºå…³é”®å­—
+#define DELKEY -2				// è¢«åˆ å…³é”®å­—
 
-typedef int KeyType;			// ¹Ø¼ü×ÖÀàĞÍ
-typedef char* InfoType;			// ÆäËûÊı¾İÀàĞÍ
+typedef int KeyType;			// å…³é”®å­—ç±»å‹
+typedef char* InfoType;			// å…¶ä»–æ•°æ®ç±»å‹
 
 typedef struct 
 {
-	KeyType key;				// ¹Ø¼ü×ÖÓò
-	InfoType data;				// ÆäËûÊı¾İÓò
-	int count;					// Ì½²é´ÎÊıÓò
+	KeyType key;				// å…³é”®å­—åŸŸ
+	InfoType data;				// å…¶ä»–æ•°æ®åŸŸ
+	int count;					// æ¢æŸ¥æ¬¡æ•°åŸŸ
 }HashData;
 
-typedef HashData HashTable[MaxSize];		// ¹şÏ£±íÀàĞÍ
+typedef HashData HashTable[MaxSize];		// å“ˆå¸Œè¡¨ç±»å‹
 
 /*
- * p±íÊ¾Ğ¡ÓÚµÈÓÚ¹şÏ£±í³¤¶ÈµÄÖÊÊı
- * m:¹şÏ£±í³¤¶È
+ * pè¡¨ç¤ºå°äºç­‰äºå“ˆå¸Œè¡¨é•¿åº¦çš„è´¨æ•°
+ * m:å“ˆå¸Œè¡¨é•¿åº¦
 */
 void InsertHT(HashTable ha, KeyType k, int m, int p)
 {
 	int i, adr;
 	adr = k % p;
 
-	// key¿ÉÒÔÖ±½Ó·ÅÔÚ¹şÏ£±íÖĞ
+	// keyå¯ä»¥ç›´æ¥æ”¾åœ¨å“ˆå¸Œè¡¨ä¸­
 	if (ha[adr].key == NULLKEY || ha[adr].key == DELKEY)
 	{
 		ha[adr].key = k;
@@ -36,7 +36,7 @@ void InsertHT(HashTable ha, KeyType k, int m, int p)
 	}
 	else
 	{
-		// ·¢Éú³åÍ»Ê±²ÉÓÃÏßĞÔÌ½²é·¨½â¾ö³åÍ»
+		// å‘ç”Ÿå†²çªæ—¶é‡‡ç”¨çº¿æ€§æ¢æŸ¥æ³•è§£å†³å†²çª
 		i = 1;
 		do {
 			adr = (adr + 1) % m;
@@ -49,11 +49,11 @@ void InsertHT(HashTable ha, KeyType k, int m, int p)
 }
 
 /*
- * ha±íÊ¾¹şÏ£±í
- * x[]±íÊ¾²åÈëµÄ¹Ø¼ü×Ö
- * n±íÊ¾x[]¹Ø¼ü×ÖĞòÁĞµÄ³¤¶È
- * m±íÊ¾¹şÏ£±íµÄ³¤¶È
- * p±íÊ¾Ğ¡ÓÚµÈÓÚmµÄÖÊÊı
+ * haè¡¨ç¤ºå“ˆå¸Œè¡¨
+ * x[]è¡¨ç¤ºæ’å…¥çš„å…³é”®å­—
+ * nè¡¨ç¤ºx[]å…³é”®å­—åºåˆ—çš„é•¿åº¦
+ * mè¡¨ç¤ºå“ˆå¸Œè¡¨çš„é•¿åº¦
+ * pè¡¨ç¤ºå°äºç­‰äºmçš„è´¨æ•°
 */
 void CreateHT(HashTable ha, KeyType x[], int n, int m, int p)
 {
@@ -69,10 +69,10 @@ void CreateHT(HashTable ha, KeyType x[], int n, int m, int p)
 }
 
 /*
- * ha±íÊ¾¹şÏ£±í
- * p±íÊ¾Ğ¡ÓÚµÈÓÚ¹şÏ£±í³¤¶ÈµÄÖÊÊı
- * kÒª²éÕÒµÄ¹Ø¼ü×Ö
- * ·µ»ØÖµ: ³É¹¦·µ»Ø¹şÏ£µØÖ·£¬Ê§°Ü·µ»Ø-1
+ * haè¡¨ç¤ºå“ˆå¸Œè¡¨
+ * pè¡¨ç¤ºå°äºç­‰äºå“ˆå¸Œè¡¨é•¿åº¦çš„è´¨æ•°
+ * kè¦æŸ¥æ‰¾çš„å…³é”®å­—
+ * è¿”å›å€¼: æˆåŠŸè¿”å›å“ˆå¸Œåœ°å€ï¼Œå¤±è´¥è¿”å›-1
 */
 int SearchHT(HashTable ha, int m, int p, KeyType k)
 {
@@ -92,11 +92,11 @@ int SearchHT(HashTable ha, int m, int p, KeyType k)
 }
 
 /*
- * ha: ¹şÏ£±í
- * p£ºĞ¡ÓÚµÈÓÚ¹şÏ£±í³¤¶ÈµÄÖÊÊı
- * k£ºÒªÉ¾³ıµÄ¹Ø¼ü×Ö
- * n£º¹şÏ£±í³¤¶È
- * ·µ»ØÖµ£º³É¹¦·µ»Ø0£¬Ê§°Ü·µ»Ø-1
+ * ha: å“ˆå¸Œè¡¨
+ * pï¼šå°äºç­‰äºå“ˆå¸Œè¡¨é•¿åº¦çš„è´¨æ•°
+ * kï¼šè¦åˆ é™¤çš„å…³é”®å­—
+ * nï¼šå“ˆå¸Œè¡¨é•¿åº¦
+ * è¿”å›å€¼ï¼šæˆåŠŸè¿”å›0ï¼Œå¤±è´¥è¿”å›-1
 */
 int DeleteHT(HashTable ha, int m, int p, int k)
 {
@@ -112,15 +112,15 @@ int DeleteHT(HashTable ha, int m, int p, int k)
 
 /*
  * print hash table
- * mÎª¹şÏ£±í³¤¶È
- * nÎª¹Ø¼ü×Ö¸öÊı
+ * mä¸ºå“ˆå¸Œè¡¨é•¿åº¦
+ * nä¸ºå…³é”®å­—ä¸ªæ•°
 */
 void DispHT(HashTable ha, int n, int m)
 {
 	float avg = 0;
 	int i;
 
-	printf("¹şÏ£±íµØÖ·: \t");
+	printf("å“ˆå¸Œè¡¨åœ°å€: \t");
 	for (i = 0; i < m; ++i)
 	{
 		if (ha[i].key != NULLKEY && ha[i].key != DELKEY)
@@ -128,7 +128,7 @@ void DispHT(HashTable ha, int n, int m)
 	}
 	printf("\n");
 
-	printf("¹şÏ£±í¹Ø¼ü×Ö: \t");
+	printf("å“ˆå¸Œè¡¨å…³é”®å­—: \t");
 	for (i = 0; i < m; ++i)
 	{
 		//if (ha[i].key == NULLKEY || ha[i].key == DELKEY)
@@ -140,7 +140,7 @@ void DispHT(HashTable ha, int n, int m)
 	}
 	printf("\n");
 
-	printf("ËÑË÷´ÎÊı: \t");
+	printf("æœç´¢æ¬¡æ•°: \t");
 	for (i = 0; i < m; ++i)
 	{
 		//if (ha[i].key == NULLKEY || ha[i].key == DELKEY)
@@ -156,7 +156,7 @@ void DispHT(HashTable ha, int n, int m)
 		if (ha[i].key != NULLKEY && ha[i].key != DELKEY)
 			avg = avg + ha[i].count;
 	avg = avg / n;
-	printf("Æ½¾ùËÑË÷³¤¶ÈASL(%d) = %g\n", n, avg);
+	printf("å¹³å‡æœç´¢é•¿åº¦ASL(%d) = %g\n", n, avg);
 }
 
 
@@ -164,9 +164,9 @@ int main()
 {
 	int x[] = { 16, 74, 60, 43, 54, 90, 46, 31, 29, 88, 77 };
 	int n = sizeof(x) / sizeof(x[0]);
-	// n:¹Ø¼ü×Ö¸öÊı
-	// m:¹şÏ£±í³¤¶È
-	// p:Ğ¡ÓÚµÈÓÚmµÄÖÊÊı
+	// n:å…³é”®å­—ä¸ªæ•°
+	// m:å“ˆå¸Œè¡¨é•¿åº¦
+	// p:å°äºç­‰äºmçš„è´¨æ•°
 	int m = 13, p = 11, i, k = 54;
 
 	HashTable ha;
@@ -183,10 +183,10 @@ int main()
 	if (-1 != i)
 		printf("ha[%d].kye = %d\n", i, k);
 	else
-		printf("Î´ÕÒµ½%d\n", k);
+		printf("æœªæ‰¾åˆ°%d\n", k);
 
 	k = 77;
-	printf("É¾³ı¹Ø¼ü×Ö%d\n", k);
+	printf("åˆ é™¤å…³é”®å­—%d\n", k);
 	DeleteHT(ha, m, p, k);
 	DispHT(ha, n, m);
 

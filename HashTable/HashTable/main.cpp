@@ -25,29 +25,29 @@ int main()
 	e = HashTableFind(hash, key);
 	if (NULL != e)
 	{
-		printf("ÖµÎª: %d\n", *e);
+		printf("å€¼ä¸º: %d\n", *e);
 		*e = 123;
-		printf("ĞŞ¸Äºó\n");
+		printf("ä¿®æ”¹å\n");
 		e = HashTableFind(hash, key);
 		if (NULL != e)
-			printf("ÖµÎª: %d\n", *e);
+			printf("å€¼ä¸º: %d\n", *e);
 	}
 	else
-		printf("¼ü%d²»´æÔÚ\n", key);
+		printf("é”®%dä¸å­˜åœ¨\n", key);
 
 	key = 171;
 	ret = HashTableDelete(hash, key);
 	if (true == ret)
 	{
-		printf("¼üÖµ¶Ô%dÉ¾³ı³É¹¦\n", key);
+		printf("é”®å€¼å¯¹%dåˆ é™¤æˆåŠŸ\n", key);
 		e = HashTableFind(hash, key);
 		if (NULL != e)
-			printf("ÖµÎª%d\n", *e);
+			printf("å€¼ä¸º%d\n", *e);
 		else
-			printf("¼ü%d²»´æÔÚ\n", key);
+			printf("é”®%dä¸å­˜åœ¨\n", key);
 	}
 	else
-		printf("¼ü%d²»´æÔÚ\n", key);
+		printf("é”®%dä¸å­˜åœ¨\n", key);
 
 	HashTableDestroy(&hash);
 
