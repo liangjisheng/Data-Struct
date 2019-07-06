@@ -1,32 +1,32 @@
 
-// Ã°ÅÝÅÅÐò
+// å†’æ³¡æŽ’åº
 #include <stdio.h>
 
 #define LENGTH(arr) ((sizeof(arr)) / (sizeof(arr[0])))
 #define  SWAP(a, b) (a ^= b, b ^= a, a ^= b)
 
 /**
- * a:´ýÅÅÐòµÄÊý×é
- * n:Êý×éµÄ³¤¶È
+ * a:å¾…æŽ’åºçš„æ•°ç»„
+ * n:æ•°ç»„çš„é•¿åº¦
 */
 void bubble_sort1(int a[], int n)
 {
 	int i, j;
 	for (i = n - 1; i > 0; --i)
 	{
-		// ½«a[0...i]ÖÐµÄ×î´óÊý¾Ý·ÅÔÚÄ©Î²
+		// å°†a[0...i]ä¸­çš„æœ€å¤§æ•°æ®æ”¾åœ¨æœ«å°¾
 		for (j = 0; j < i; ++j)
 			if (a[j] > a[j + 1])
 				SWAP(a[j], a[j + 1]);
 	}
 }
 
-// Ã°ÅÝÅÅÐò¸Ä½ø°æ,Ìí¼ÓÒ»¸ö±ê¼Ç£¬Èç¹ûÒ»ÌË±éÀúÖÐ·¢ÉúÁË½»»»£¬Ôò±ê¼ÇÎªtrue£¬·ñÔòÎªfalse
-// Èç¹ûÄ³Ò»ÌËÃ»ÓÐ·¢Éú½»»»£¬ËµÃ÷ÅÅÐòÒÑ¾­Íê³É
+// å†’æ³¡æŽ’åºæ”¹è¿›ç‰ˆ,æ·»åŠ ä¸€ä¸ªæ ‡è®°ï¼Œå¦‚æžœä¸€è¶ŸéåŽ†ä¸­å‘ç”Ÿäº†äº¤æ¢ï¼Œåˆ™æ ‡è®°ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalse
+// å¦‚æžœæŸä¸€è¶Ÿæ²¡æœ‰å‘ç”Ÿäº¤æ¢ï¼Œè¯´æ˜ŽæŽ’åºå·²ç»å®Œæˆ
 void bubble_sort2(int a[], int n)
 {
 	int i, j;
-	int flag;		// ±ê¼Ç
+	int flag;		// æ ‡è®°
 
 	for (i = n - 1; i > 0; --i)
 	{
@@ -37,11 +37,11 @@ void bubble_sort2(int a[], int n)
 			if (a[j] > a[j + 1])
 			{
 				SWAP(a[j], a[j + 1]);
-				flag = 1;		// Èç¹û·¢Éú½»»»£¬ÔòÉè±ê¼ÇÎª1
+				flag = 1;		// å¦‚æžœå‘ç”Ÿäº¤æ¢ï¼Œåˆ™è®¾æ ‡è®°ä¸º1
 			}
 		}
 
-		if (0 == flag)			// Ã»ÓÐ·¢Éú½»»»£¬ËµÃ÷ÊýÁÐÒÑ¾­ÓÐÐò
+		if (0 == flag)			// æ²¡æœ‰å‘ç”Ÿäº¤æ¢ï¼Œè¯´æ˜Žæ•°åˆ—å·²ç»æœ‰åº
 			break;
 	}
 }

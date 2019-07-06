@@ -1,10 +1,10 @@
 
-// Í°ÅÅÐò(Bucket Sort)µÄÔ­ÀíºÜ¼òµ¥£¬ËüÊÇ½«Êý×é·Öµ½ÓÐÏÞÊýÁ¿µÄÍ°×ÓÀï
-// ¼ÙÉè´ýÅÅÐòµÄÊý×éaÖÐ¹²ÓÐN¸öÕûÊý£¬²¢ÇÒÒÑÖªÊý×éaÖÐÊý¾ÝµÄ·¶Î§[0, MAX)¡£ÔÚÍ°ÅÅÐòÊ±
-// ´´½¨ÈÝÁ¿ÎªMAXµÄÍ°Êý×ér£¬²¢½«Í°Êý×éÔªËØ¶¼³õÊ¼»¯Îª0£»½«ÈÝÁ¿ÎªMAXµÄÍ°Êý×éÖÐµÄÃ¿Ò»
-// ¸öµ¥Ôª¶¼¿´×÷Ò»¸ö"Í°"¡£
-// ÔÚÅÅÐòÊ±£¬Öð¸ö±éÀúÊý×éa£¬½«Êý×éaµÄÖµ£¬×÷Îª"Í°Êý×ér"µÄÏÂ±ê¡£µ±aÖÐÊý¾Ý±»¶ÁÈ¡Ê±
-// ¾Í½«Í°µÄÖµ¼Ó1¡£ÀýÈç£¬¶ÁÈ¡µ½Êý×éa[3]=5£¬Ôò½«r[5]µÄÖµ+1
+// æ¡¶æŽ’åº(Bucket Sort)çš„åŽŸç†å¾ˆç®€å•ï¼Œå®ƒæ˜¯å°†æ•°ç»„åˆ†åˆ°æœ‰é™æ•°é‡çš„æ¡¶å­é‡Œ
+// å‡è®¾å¾…æŽ’åºçš„æ•°ç»„aä¸­å…±æœ‰Nä¸ªæ•´æ•°ï¼Œå¹¶ä¸”å·²çŸ¥æ•°ç»„aä¸­æ•°æ®çš„èŒƒå›´[0, MAX)ã€‚åœ¨æ¡¶æŽ’åºæ—¶
+// åˆ›å»ºå®¹é‡ä¸ºMAXçš„æ¡¶æ•°ç»„rï¼Œå¹¶å°†æ¡¶æ•°ç»„å…ƒç´ éƒ½åˆå§‹åŒ–ä¸º0ï¼›å°†å®¹é‡ä¸ºMAXçš„æ¡¶æ•°ç»„ä¸­çš„æ¯ä¸€
+// ä¸ªå•å…ƒéƒ½çœ‹ä½œä¸€ä¸ª"æ¡¶"ã€‚
+// åœ¨æŽ’åºæ—¶ï¼Œé€ä¸ªéåŽ†æ•°ç»„aï¼Œå°†æ•°ç»„açš„å€¼ï¼Œä½œä¸º"æ¡¶æ•°ç»„r"çš„ä¸‹æ ‡ã€‚å½“aä¸­æ•°æ®è¢«è¯»å–æ—¶
+// å°±å°†æ¡¶çš„å€¼åŠ 1ã€‚ä¾‹å¦‚ï¼Œè¯»å–åˆ°æ•°ç»„a[3]=5ï¼Œåˆ™å°†r[5]çš„å€¼+1
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,10 +13,10 @@
 #define LENGTH(a) ( (sizeof(a)) / (sizeof(a[0])) )
 
 /**
- * Í°ÅÅÐò
- * a: ´ýÅÅÐòÊý×é
- * n: Êý×é³¤¶È
- * nMax: Êý×éaÖÐ×î´óÖµµÄ·¶Î§
+ * æ¡¶æŽ’åº
+ * a: å¾…æŽ’åºæ•°ç»„
+ * n: æ•°ç»„é•¿åº¦
+ * nMax: æ•°ç»„aä¸­æœ€å¤§å€¼çš„èŒƒå›´
 */
 void bucket_sort(int a[], int n, int nMax)
 {
@@ -26,16 +26,16 @@ void bucket_sort(int a[], int n, int nMax)
 	if (a == NULL || n < 1 || nMax < 1)
 		return ;
 
-	// ´´½¨Ò»¸öÈÝÁ¿ÎªmaxµÄÊý×ébuckets£¬²¢ÇÒ½«bucketsÖÐµÄËùÓÐÊý¾Ý¶¼³õÊ¼»¯Îª0
+	// åˆ›å»ºä¸€ä¸ªå®¹é‡ä¸ºmaxçš„æ•°ç»„bucketsï¼Œå¹¶ä¸”å°†bucketsä¸­çš„æ‰€æœ‰æ•°æ®éƒ½åˆå§‹åŒ–ä¸º0
 	if ((buckets = (int *)malloc(nMax * sizeof(int))) == NULL)
 		return ;
 	memset(buckets, 0, nMax * sizeof(int));
 
-	// 1.¼ÆÊý
+	// 1.è®¡æ•°
 	for (i = 0; i < n; ++i)
 		buckets[a[i]]++;
 
-	// 2.ÅÅÐò
+	// 2.æŽ’åº
 	for (i = 0, j = 0; i < nMax; ++i)
 		while ((buckets[i]--) > 0)
 			a[j++] = i;
