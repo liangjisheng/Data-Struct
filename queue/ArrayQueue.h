@@ -1,5 +1,5 @@
 
-// C++ʵ��һ������ʵ�ֵĶ��У��ܴ洢�������͵�����
+// C++实现一：数组实现的队列，能存储任意类型的数据
 
 #ifndef ARRAY_QUEUE_HXX
 #define ARRAY_QUEUE_HXX

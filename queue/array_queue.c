@@ -1,6 +1,6 @@
 
 /**
-  * C ÓïÑÔ: Êı×éÊµÏÖµÄ¶ÓÁĞ£¬Ö»ÄÜ´æ´¢intÊı¾İ¡£
+  * C è¯­è¨€: æ•°ç»„å®ç°çš„é˜Ÿåˆ—ï¼Œåªèƒ½å­˜å‚¨intæ•°æ®ã€‚
   *
   * @author liangjisheng
   * @date 2017/10/09
@@ -12,7 +12,7 @@
 static int *arr = NULL;
 static int count;
 
-// ´´½¨¶ÓÁĞ
+// åˆ›å»ºé˜Ÿåˆ—
 int create_array_queue(int sz)
 {
 	arr = (int *)malloc(sz * sizeof(int));
@@ -26,25 +26,25 @@ int create_array_queue(int sz)
 	return 0;
 }
 
-// Ïú»Ù¶ÓÁĞ
+// é”€æ¯é˜Ÿåˆ—
 int destroy_array_queue()
 {
 	if(arr)
 	{
-		delete [] arr;
+		free(arr);
 		arr = NULL;
 	}
 
 	return 0;
 }
 
-// ½«valÌí¼Óµ½¶ÓÁĞµÄÄ©Î²
+// å°†valæ·»åŠ åˆ°é˜Ÿåˆ—çš„æœ«å°¾
 void add(int val) { arr[count++] = val; }
 
-// ·µ»Ø¶ÓÁĞ¿ªÍ·ÔªËØ
+// è¿”å›é˜Ÿåˆ—å¼€å¤´å…ƒç´ 
 int front() { return arr[0]; }
 
-// ·µ»Ø²¢É¾³ı¶ÓÁĞ¿ªÍ·ÔªËØ
+// è¿”å›å¹¶åˆ é™¤é˜Ÿåˆ—å¼€å¤´å…ƒç´ 
 int pop()
 {
 	int i = 0;
